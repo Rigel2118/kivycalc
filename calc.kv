@@ -1,0 +1,161 @@
+#:import hex kivy.utils.get_color_from_hex
+#:set color_text hex("#4c4f69")
+#:set color_mantle hex("#e6e9ef")
+#:set color_surface0 hex("#ccd0da")
+#:set color_lavender hex("#7287fd")
+#:set color_mauve hex("#8839ef")
+#:set color_pink hex("#ea76cb")
+#:set color_maroon hex("#e64553")
+#:set color_green hex("#40a02b")
+#:set monospace "fonts/DejaVuSansMono.ttf"
+#:set monospace_bold "fonts/DejaVuSansMono-Bold.ttf"
+#:set global_size 24
+<Button1@Button>:
+    canvas.before:
+        Color:
+            rgba: color_surface0  # Green color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [sp(12),]
+    background_color: (0, 0, 0, 0)  # Transparent default background
+    font_size: sp(32)
+	font_name: monospace_bold
+    color: color_mauve
+MainGrid:
+	canvas.before:
+        Color:
+            rgba: color_mantle
+        Rectangle:
+            pos: self.pos
+            size: self.size
+	rows: 4
+	cols: 1
+	padding: "10dp"
+	spacing: "10dp"
+	Label:
+		canvas.before:
+			Color:
+				rgba: color_surface0  # Green color
+			RoundedRectangle:
+				pos: self.pos
+				size: self.size
+				radius: [sp(5),]
+		id: text_output
+		valign: "bottom"
+		foreground_color: color_text
+		font_size: sp(global_size)
+		text_size: self.size
+		font_name: monospace
+		color: color_text
+		multiline: False
+		size_hint: 1, 1
+	TextInput:
+		id: text_input
+		text: "█"
+		input_type: "null"
+		cursor_color: color_mauve
+		cursor_width: dp(3)
+		foreground_color: color_text
+		font_size: sp(global_size)
+		font_name: monospace
+		color: color_text
+		hint_text: "Enter expression here..."
+		multiline: True
+		size_hint: 1, 0.5
+		focus: False
+		readonly: True
+
+	GridLayout:
+		rows: 5
+		cols: 5
+		spacing: "5dp"
+		Button1:
+			on_press: root.on_button7_click()
+			text: "7"
+		Button1:
+			on_press: root.on_button8_click()
+			text: "8"
+		Button1:
+			on_press: root.on_button9_click()
+			text: "9"
+
+		Button1:
+			on_press: root.on_button_DEL_click()
+			color: color_green
+			text: "DEL"
+		Button1:
+			color: color_green
+			text: "CLR"
+			on_press: root.on_button_CLR_click()
+		Button1:
+			on_press: root.on_button4_click()
+			text: "4"
+		Button1:
+			on_press: root.on_button5_click()
+			text: "5"
+		Button1:
+			on_press: root.on_button6_click()
+			text: "6"
+		Button1:
+			color: color_maroon
+			text: "*"
+			on_press: root.on_button_prod_click()
+		Button1:
+			color: color_maroon
+			text: "/"
+			on_press: root.on_button_quot_click()
+
+		Button1:
+			on_press: root.on_button1_click()
+			text: "1"
+		Button1:
+			on_press: root.on_button2_click()
+			text: "2"
+		Button1:
+			on_press: root.on_button3_click()
+			text: "3"
+		Button1:
+			color: color_maroon
+			text: "+"
+			on_press: root.on_button_plus_click()
+		Button1:
+			color: color_maroon
+			text: "-"
+			on_press: root.on_button_minus_click()
+
+		Button1:
+			on_press: root.on_button0_click()
+			text: "0"
+		Button1:
+			on_press: root.on_buttonp_click()
+			text: "."
+		Button1:
+			color: color_maroon
+			text: "^"
+			on_press: root.on_button_power_click()
+		Button1:
+			color: color_maroon
+			text: "("
+			on_press: root.on_button_open_click()
+		Button1:
+			color: color_maroon
+			text: ")"
+			on_press: root.on_button_close_click()
+		Widget:
+		Widget:
+		Widget:
+		Widget:
+		Button1:
+			color: color_green
+			text: "="
+			on_press: root.on_button_equals_click()
+
+
+
+
+
+
+
+
+
