@@ -1,0 +1,19 @@
+<HistoryTab>:
+	name: "history"
+	spacing: "10sp"
+	
+	MDRecycleView:
+		id: history_scroll
+		viewclass: "HistoryCard"
+		data: []
+		size_hint_y: 1
+		
+		MDRecycleBoxLayout:
+			id: history_stand
+			orientation: 'vertical'
+			default_size: None, None
+			default_size_hint: 1, None
+			size_hint_y: None
+			height: self.minimum_height
+			spacing: "10sp"
+			padding: "10sp"

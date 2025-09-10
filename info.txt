@@ -1,0 +1,29 @@
+kivycalc v0.4.0-beta
+
+# Instructions
+
+1) Enter an arithmetic expression using the provided keyboard.
+2) Click on "=" button and it will attempt to solve that.
+3) The output is on the lower label. It will send an error message if the expression has any mistakes in syntax, the result is too large or if anything else ocurred.
+
+# History
+
+1) kivycalc has a history-lookup mode that allows to use previously submitted expressions. 
+2) The indicator with a number and a letter like "1N" shows the number of expression (line) you're in. Of course, as you submit expressions, it will increase. If you're currently writing a new expression, it will show an N at the end.
+3) If you press the button P, it will take you to the previous latest line on your history. Similarly, you can go to the next line with the button N. It will show an H at the end if you're currently navigating history and it is not a new line. 
+4) You can write over history lines but it will override whatever was on your new line and will take you back to it.
+5) You can return to the new line by pressing N until you reach the bottom.
+6) You can clear the history by clicking CLRH.
+
+# Notes about syntax (by design)
+
+1) "+" and "-" operators AFTER a "*", "/" or "^" operator are treated as number signs. For instance, "5*-3" means "5*(-3)".
+2) Repeated "+" and "-" operators are taken as a sign product. For instance, "---5" means "-(-(-(5))) = -5" and "+++5" means simply "+5" or "5" depending on the context.
+
+# About
+
+CommonTools
+Created by Rigel2118
+
+Visit the project source at:
+https://github.com/Rigel2118/kivycalc

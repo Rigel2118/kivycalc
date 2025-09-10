@@ -1,0 +1,28 @@
+MDBoxLayout:
+	orientation: "vertical"
+	md_bg_color: self.theme_cls.backgroundColor
+	
+	MDScreenManager:
+		id: screen_manager
+		HomeTab:
+		HistoryTab:
+		SettingsTab:
+		EmptyTab:
+
+	MDNavigationBar:
+		id: navbar
+		on_switch_tabs: app.on_switch_tabs(*args)
+		ripple_scale: 0
+		
+		BaseMDNavigationItem
+			icon: "home"
+			text: "home"
+			active: True
+
+		BaseMDNavigationItem
+			icon: "history"
+			text: "history"
+
+		BaseMDNavigationItem
+			icon: "tune"
+			text: "settings"

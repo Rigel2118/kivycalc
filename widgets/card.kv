@@ -1,0 +1,27 @@
+<HistoryCard>:
+	style: "filled"
+	ripple_behavior: True
+    focus_behavior: False
+    size_hint_x: 1
+	size_hint_y: None
+	height: relative.height
+	text: ""
+	
+	on_release: 
+		root.write_io()
+		root.go_home()
+	
+	RelativeLayout:
+		id: relative
+		height: content_label.height
+		
+		MDLabel:
+			id: content_label
+			text: root.text
+			theme_font_name: "Custom"
+			font_name: "fonts/DejaVuSansMono.ttf"
+			font_size: "20sp"
+			size_hint_y: None
+        	height: self.texture_size[1]
+			padding: ["20sp","10sp","20sp","10sp"]
+			pos_hint: {"center_x": .5, "center_y": .5}

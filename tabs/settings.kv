@@ -1,0 +1,67 @@
+<SettingsTab>:
+	name: "settings"
+	md_bg_color: self.theme_cls.backgroundColor
+	
+	MDGridLayout:
+		rows: 5
+		cols: 1
+		
+		MDListItem:
+			on_release: app.show_theme_dialog()
+			size_hint_x: 1
+			MDListItemHeadlineText:
+				text: "Theme"
+			MDListItemSupportingText:
+				id: theme_text
+        		text: "Light"
+			MDListItemLeadingIcon:
+				icon: "theme-light-dark"
+				pos_hint: {"center_y": 0.5}
+
+		MDListItem:
+			on_release: app.show_palette_dialog()
+			size_hint_x: 1
+			MDListItemHeadlineText:
+				text: "Palette"
+			MDListItemSupportingText:
+				id: palette_text
+        		text: "Blue"
+			MDListItemLeadingIcon:
+				icon: "palette"
+				pos_hint: {"center_y": 0.5}
+
+		MDListItem:
+			on_release: app.show_precision_dialog()
+			size_hint_x: 1
+			MDListItemHeadlineText:
+				text: "SCI mode precision"
+			MDListItemSupportingText:
+				id: precision_text
+        		text: "5 digits"
+			MDListItemLeadingIcon:
+				icon: "numeric"
+				pos_hint: {"center_y": 0.5}
+				
+		MDListItem:
+			on_release: app.show_history_dialog()
+			size_hint_x: 1
+			MDListItemHeadlineText:
+				text: "Preserve history"
+			MDListItemSupportingText:
+				id: history_text
+        		text: "On"
+			MDListItemLeadingIcon:
+				icon: "content-save"
+				pos_hint: {"center_y": 0.5}
+		
+		MDListItem:
+			on_release: app.show_info_dialog()
+			size_hint_x: 1
+			MDListItemHeadlineText:
+				text: "About"
+			MDListItemSupportingText:
+				text: "Credits"
+			MDListItemLeadingIcon:
+				icon: "information"
+				pos_hint: {"center_y": 0.5}
+

@@ -1,0 +1,10 @@
+__pycache__/
+kivyenv/
+temp.kv
+.buildozer/
+kivyenv/
+todo.txt
+bin/
+data/
+path
+.webui_secret_key

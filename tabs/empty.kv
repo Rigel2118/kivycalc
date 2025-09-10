@@ -1,0 +1,23 @@
+<EmptyTab@MDScreen>:
+	name: "empty"
+	MDGridLayout:
+		id: history_grid
+		md_bg_color: self.theme_cls.backgroundColor
+		rows: 1
+		cols: 1
+		spacing: "10sp"
+		#padding: "10sp"
+		MDScrollView:
+			id: history_scroll
+			do_scroll_x: False
+			do_scroll_y: True
+			adaptive_height: True
+			MDAnchorLayout:
+				MDLabel:
+					text: "No items yet!"
+					font_style: "Headline"
+    				role: "medium"
+					theme_text_color: "Custom"
+    				text_color: "grey"
+					valign: "center"
+					halign: "center"
