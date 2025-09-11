@@ -1,4 +1,4 @@
-# kivycalc v0.5.0-beta
+# kivycalc v0.5.1-beta
 
 # Python modules
 import os, time, json, webbrowser
