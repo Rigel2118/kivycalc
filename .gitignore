@@ -5,7 +5,8 @@ temp.kv
 kivyenv/
 todo.txt
 bin/
-data/
+data/*
+config/*
 path
 .webui_secret_key
 test.py
