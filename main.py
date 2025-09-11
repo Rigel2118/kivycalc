@@ -11,6 +11,7 @@ from kivy.clock import Clock
 from kivy.utils import platform
 from kivy.metrics import sp
 from kivy.lang import Builder
+from kivy.config import Config
 from kivy.core.window import Window
 from kivy.properties import StringProperty
 from kivy.properties import NumericProperty
@@ -48,6 +49,8 @@ from kivymd.uix.list import (
 	MDListItemTrailingCheckbox,
 )
 
+
+
 # Load classes
 def load_kv_files():
 
@@ -71,7 +74,7 @@ data_input = os.path.join(BASE_DIR, 'data', 'input.dat') # Used to store inputs
 data_output = os.path.join(BASE_DIR, 'data', 'output.dat') # Used to store results
 data_info = os.path.join(BASE_DIR, 'data', 'info.txt') # Not used yet
 data_conf = os.path.join(BASE_DIR, 'config', 'config.json') # Used to store app settings
-	
+
 # Create files
 def create_io_files(*args): 
 	try:
