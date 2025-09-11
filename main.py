@@ -353,18 +353,19 @@ class calcApp(MDApp):
 				active_option = i
 				break
 		
-		# Set the primary palette to the selected color
-		self.theme_cls.theme_style = active_option.name
-		self.set_bars_colors()
-		
-		# Update text
-		app = MDApp.get_running_app()
-		settings = app.root.ids.screen_manager.get_screen("settings")
-		settings.ids.theme_text.text = active_option.name
-		
-		# Save to file
-		self.save_config_file({"theme":active_option.name})
-		self.dialog.dismiss()
+		if active_option:
+			# Set the primary palette to the selected color
+			self.theme_cls.theme_style = active_option.name
+			self.set_bars_colors()
+			
+			# Update text
+			app = MDApp.get_running_app()
+			settings = app.root.ids.screen_manager.get_screen("settings")
+			settings.ids.theme_text.text = active_option.name
+			
+			# Save to file
+			self.save_config_file({"theme":active_option.name})
+			self.dialog.dismiss()
 
 	# Palette dialog
 	def show_palette_dialog(self):
@@ -466,19 +467,20 @@ class calcApp(MDApp):
 				active_option = i
 				break
 		
-		# Set the primary palette to the selected color
-		self.theme_cls.primary_palette = active_option.name
-		self.set_bars_colors()
-		
-		# Update text
-		app = MDApp.get_running_app()
-		settings = app.root.ids.screen_manager.get_screen("settings")
-		settings.ids.palette_text.text = active_option.name
-		
-		# Save to file
-		self.save_config_file({"palette":active_option.name})
-		
-		self.dialog.dismiss()
+		if active_option:
+			# Set the primary palette to the selected color
+			self.theme_cls.primary_palette = active_option.name
+			self.set_bars_colors()
+			
+			# Update text
+			app = MDApp.get_running_app()
+			settings = app.root.ids.screen_manager.get_screen("settings")
+			settings.ids.palette_text.text = active_option.name
+			
+			# Save to file
+			self.save_config_file({"palette":active_option.name})
+			
+			self.dialog.dismiss()
 	
 	# Precision
 	def show_precision_dialog(self):
@@ -580,18 +582,19 @@ class calcApp(MDApp):
 				active_option = i
 				break
 		
-		# Set the global config
-		self.precision = active_option.name
-		
-		# Update text
-		app = MDApp.get_running_app()
-		settings = app.root.ids.screen_manager.get_screen("settings")
-		settings.ids.precision_text.text = active_option.name
-		
-		# Save to file
-		self.save_config_file({"precision": active_option.name})
-		
-		self.dialog.dismiss()
+		if active_option:
+			# Set the global config
+			self.precision = active_option.name
+			
+			# Update text
+			app = MDApp.get_running_app()
+			settings = app.root.ids.screen_manager.get_screen("settings")
+			settings.ids.precision_text.text = active_option.name
+			
+			# Save to file
+			self.save_config_file({"precision": active_option.name})
+			
+			self.dialog.dismiss()
 	
 	# Preserve-history dialog
 	def show_history_dialog(self):

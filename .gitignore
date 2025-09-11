@@ -8,3 +8,4 @@ bin/
 data/
 path
 .webui_secret_key
+test.py
