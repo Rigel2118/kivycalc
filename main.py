@@ -702,15 +702,16 @@ class calcApp(MDApp):
 				active_option = i
 				break
 		
-		# Save config
-		self.save_config_file({"preserve-history":active_option.name})
-		
-		# Update text
-		app = MDApp.get_running_app()
-		settings = app.root.ids.screen_manager.get_screen("settings")
-		settings.ids.history_text.text = active_option.name
-		
-		self.dialog.dismiss()
+		if active_option:
+			# Save config
+			self.save_config_file({"preserve-history":active_option.name})
+			
+			# Update text
+			app = MDApp.get_running_app()
+			settings = app.root.ids.screen_manager.get_screen("settings")
+			settings.ids.history_text.text = active_option.name
+			
+			self.dialog.dismiss()
 
 	# Info dialog
 	def show_info_dialog(self):
