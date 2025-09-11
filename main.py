@@ -75,11 +75,17 @@ data_conf = os.path.join(BASE_DIR, 'config', 'config.json') # Used to store app 
 # Create files
 def create_io_files(*args): 
 	try:
+		# Create folder if it doesn't exist
+		os.makedirs(os.path.join(BASE_DIR, 'data'), exist_ok=True)
+		
 		with open(data_input, 'w') as f: 
 			pass
+			
 		with open(data_output, 'w') as f:
 			pass
+			
 		print("Data files created successfully")
+		
 	except Exception as e:
 		print(f"Error creating files: {e}")
 		
@@ -177,6 +183,9 @@ class calcApp(MDApp):
 			"sci": "Off",
 			"precision": "5 digits"
 		}
+		
+		# Create folder if it doesn't exist
+		os.makedirs(os.path.join(BASE_DIR, 'config'), exist_ok=True)
 		
 		# Write to json file
 		with open(data_conf, "w") as file:

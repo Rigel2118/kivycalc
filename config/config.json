@@ -1,7 +1,7 @@
 {
     "theme": "Light",
-    "palette": "Yellow",
-    "preserve-history": "Off",
+    "palette": "Blue",
+    "preserve-history": "On",
     "memory": "0",
     "sci": "Off",
     "precision": "5 digits"
