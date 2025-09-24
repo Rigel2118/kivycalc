@@ -1,4 +1,4 @@
-# kivycalc v0.5.1-beta
+# kivycalc v0.6.0-beta
 
 # Python modules
 import os, time, json, webbrowser
@@ -9,7 +9,7 @@ from arithmetic import arithmetic
 # Kivy modules
 from kivy.clock import Clock
 from kivy.utils import platform
-from kivy.metrics import sp
+from kivy.metrics import dp
 from kivy.lang import Builder
 from kivy.config import Config
 from kivy.core.window import Window
@@ -316,7 +316,7 @@ class calcApp(MDApp):
 		total_height = sum(i.height for i in list_items)
 		
 		# Get optimal scrollview height
-		scrollview_height = min(sp(300), total_height)
+		scrollview_height = min(dp(300), total_height)
 		
 		self.dialog = MDDialog(
 			# ----------------------------Icon-----------------------------
@@ -351,7 +351,7 @@ class calcApp(MDApp):
 					style="text",
 					on_release=lambda x: self.close_and_save_theme(),
 				),
-				spacing="8sp",
+				spacing="8dp",
 			),
 			# -------------------------------------------------------------
 		)
@@ -433,7 +433,7 @@ class calcApp(MDApp):
 		total_height = sum(i.height for i in list_items)
 		
 		# Get optimal scrollview height
-		scrollview_height = min(sp(300), total_height)
+		scrollview_height = min(dp(300), total_height)
 		
 		self.dialog = MDDialog(
 			# ----------------------------Icon-----------------------------
@@ -464,7 +464,7 @@ class calcApp(MDApp):
 					style="text",
 					on_release=lambda x: self.close_and_save_palette(),
 				),
-				spacing="8sp",
+				spacing="8dp",
 			),
 			# -------------------------------------------------------------
 		)
@@ -548,7 +548,7 @@ class calcApp(MDApp):
 		total_height = sum(i.height for i in list_items)
 		
 		# Get optimal scrollview height
-		scrollview_height = min(sp(300), total_height)
+		scrollview_height = min(dp(300), total_height)
 		
 		self.dialog = MDDialog(
 			# ----------------------------Icon-----------------------------
@@ -579,7 +579,7 @@ class calcApp(MDApp):
 					style="text",
 					on_release=lambda x: self.close_and_save_precision(),
 				),
-				spacing="8sp",
+				spacing="8dp",
 			),
 			# -------------------------------------------------------------
 		)
@@ -655,7 +655,7 @@ class calcApp(MDApp):
 		total_height = sum(i.height for i in list_items)
 		
 		# Get optimal scrollview height
-		scrollview_height = min(sp(300), total_height)
+		scrollview_height = min(dp(300), total_height)
 		
 		self.dialog = MDDialog(
 			# ----------------------------Icon-----------------------------
@@ -686,7 +686,7 @@ class calcApp(MDApp):
 					style="text",
 					on_release=lambda x: self.close_and_save_ph(),
 				),
-				spacing="8sp",
+				spacing="8dp",
 			),
 			# -------------------------------------------------------------
 		)
@@ -733,7 +733,7 @@ class calcApp(MDApp):
 					size_hint_x = 1,
 					halign = "center",
 					valign = "center",
-					height = sp(120),
+					height = dp(120),
 				)
 			),
 			# ---------------------Button container------------------------
@@ -749,7 +749,7 @@ class calcApp(MDApp):
 					style="text",
 					on_release=lambda x: self.dialog.dismiss(),
 				),
-				spacing="8sp",
+				spacing="8dp",
 			),
 			# -------------------------------------------------------------
 		)
@@ -763,11 +763,21 @@ class HomeTab(MDScreen):
 	def __init__(self, **kwargs):
 		super().__init__(**kwargs)
 		
+		app = MDApp.get_running_app()
+		
 		# Counter
-		self.n_lines = 0
+		self.n_lines = count_lines(data_output)+1
 		
 		# Current line
 		self.cur_line = 0
+		
+		# ANS variable
+		if app.preserve_history == "On" and self.n_lines > 1:
+			self.ans = read_line(data_output, self.n_lines-1)
+			print(f"ans is: {self.ans}")
+		else:
+			self.ans = ""
+			print(f"ans is: {self.ans}")
 		
 		# Make the function an instance attribute for convenience later
 		self.create_io_files = create_io_files
@@ -781,11 +791,22 @@ class HomeTab(MDScreen):
 		self.l4 = lambda x: self.memory_add()
 		self.l5 = lambda x: self.memory_substract()
 		
+		self.l6 = lambda x: self.insert_text("asin(")
+		self.l7 = lambda x: self.insert_text("acos(")
+		self.l8 = lambda x: self.insert_text("atan(")
+		
+		self.l10 = lambda x: self.insert_text("sin(")
+		self.l11 = lambda x: self.insert_text("cos(")
+		self.l12 = lambda x: self.insert_text("tan(")
+		
+		self.l14 = lambda x: self.insert_text("sqrt(")
+		self.l15 = lambda x: self.insert_text("cbrt(")
+		
 		# Monitor 2ND button state
 		self.is_second = False
 		
 		# Monitor SCI mode
-		app = MDApp.get_running_app()
+		
 		if app.load_config_file("sci") == "On":
 			self.is_sci = True
 		else:
@@ -795,6 +816,12 @@ class HomeTab(MDScreen):
 		Clock.schedule_once(lambda dt: self.initialize_helper_text(), 0)
 		Clock.schedule_once(lambda dt: self.ids.memr.bind(on_release = self.l2), 0)
 		Clock.schedule_once(lambda dt: self.ids.mem.bind(on_release = self.l4), 0)
+		
+		Clock.schedule_once(lambda dt: self.ids.sin.bind(on_release = self.l10), 0)
+		Clock.schedule_once(lambda dt: self.ids.cos.bind(on_release = self.l11), 0)
+		Clock.schedule_once(lambda dt: self.ids.tan.bind(on_release = self.l12), 0)
+		
+		Clock.schedule_once(lambda dt: self.ids.rt.bind(on_release = self.l14), 0)
 	
 	# Update helper text
 	def update_helper(self, new=None):
@@ -876,6 +903,26 @@ class HomeTab(MDScreen):
 		self.ids.memr.unbind(on_release = self.l2)
 		self.ids.memr.bind(on_release = self.l3)
 		
+		# asin
+		self.ids.sin.text = "asin"
+		self.ids.sin.unbind(on_release = self.l10)
+		self.ids.sin.bind(on_release = self.l6)
+		
+		# acos
+		self.ids.cos.text = "acos"
+		self.ids.cos.unbind(on_release = self.l11)
+		self.ids.cos.bind(on_release = self.l7)
+		
+		# atan
+		self.ids.tan.text = "atan"
+		self.ids.tan.unbind(on_release = self.l12)
+		self.ids.tan.bind(on_release = self.l8)
+		
+		# cbrt
+		self.ids.rt.text = "cbrt"
+		self.ids.rt.unbind(on_release = self.l14)
+		self.ids.rt.bind(on_release = self.l15)
+		
 		# Toggle appearance
 		self.ids.secondf.style = "filled"
 	
@@ -895,6 +942,26 @@ class HomeTab(MDScreen):
 		self.ids.memr.text = "MR"
 		self.ids.memr.unbind(on_release = self.l3)
 		self.ids.memr.bind(on_release = self.l2)
+		
+		# sin
+		self.ids.sin.text = "sin"
+		self.ids.sin.unbind(on_release = self.l6)
+		self.ids.sin.bind(on_release = self.l10)
+		
+		# cos
+		self.ids.cos.text = "cos"
+		self.ids.cos.unbind(on_release = self.l7)
+		self.ids.cos.bind(on_release = self.l11)
+		
+		# tan
+		self.ids.tan.text = "tan"
+		self.ids.tan.unbind(on_release = self.l8)
+		self.ids.tan.bind(on_release = self.l12)
+		
+		# sqrt
+		self.ids.rt.text = "sqrt"
+		self.ids.rt.unbind(on_release = self.l15)
+		self.ids.rt.bind(on_release = self.l14)
 		
 		# Toggle appearance
 		self.ids.secondf.style = "outlined"
@@ -923,6 +990,9 @@ class HomeTab(MDScreen):
 		
 		# Call updater
 		self.update_helper()
+		
+		# ANS
+		self.ans = ""
 		
 		# Clear history
 		app = MDApp.get_running_app()
@@ -1008,21 +1078,21 @@ class HomeTab(MDScreen):
 		# Make sure there is text
 		if self.ids.input_field.text != "":
 			try:
-				# Compute
-				result=format_number(arithmetic(self.ids.input_field.text))
+			
+				app = MDApp.get_running_app()
 				
-				# Show result in output (SCI on)
+				# Compute
 				if self.is_sci:
-					app = MDApp.get_running_app()
-					sci_num = float("{:e}".format(float(result)))
 					precision = int(app.precision[0])-1
-					result = f"{sci_num:.{precision}e}"
-					
-					self.ids.output_field.text = "= "+result
-					
-				# SCI off
+					result = arithmetic(self.ids.input_field.text, self.ans, "sci", precision)
 				else:
-					self.ids.output_field.text = "= "+result
+					result = arithmetic(self.ids.input_field.text, self.ans)
+					
+				# Show in output
+				self.ids.output_field.text = "= "+result
+				
+				# ANS function
+				self.ans = result 
 				
 				# Write result to data files
 				with open(data_input, 'a+') as file:
@@ -1031,7 +1101,7 @@ class HomeTab(MDScreen):
 					file.write(result + '\n')
 				
 				# Add card in history
-				app = MDApp.get_running_app()
+				
 				app.history_tab.add_card(self.ids.input_field.text, result, self.cur_line)
 				
 				# Account for counter

@@ -16,7 +16,7 @@ source.dir = .
 source.include_exts = py,png,kv,ttf,txt,dat,json,spec
 
 # (list) List of inclusions using pattern matching
-source.include_patterns = config/,data/,fonts/*,tabs/*,widgets/*
+source.include_patterns = fonts/*,tabs/*,widgets/*
 
 # (list) Source files to exclude (let empty to not exclude anything)
 #source.exclude_exts = spec
@@ -29,7 +29,7 @@ source.include_patterns = config/,data/,fonts/*,tabs/*,widgets/*
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.5.1
+version = 0.6.0
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
